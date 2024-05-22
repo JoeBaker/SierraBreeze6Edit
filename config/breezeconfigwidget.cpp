@@ -69,6 +69,8 @@ namespace SierraBreeze
         connect(m_ui.buttonKeepBelowInactiveColor, SIGNAL(changed(QColor)), SLOT(updateChanged()));
         connect(m_ui.buttonKeepAboveActiveColor, SIGNAL(changed(QColor)), SLOT(updateChanged()));
         connect(m_ui.buttonKeepAboveInactiveColor, SIGNAL(changed(QColor)), SLOT(updateChanged()));
+        connect(m_ui.buttonApplicationMenuActiveColor, SIGNAL(changed(QColor)), SLOT(updateChanged()));
+        connect(m_ui.buttonApplicationMenuInactiveColor, SIGNAL(changed(QColor)), SLOT(updateChanged()));
 
         // track animations changes
         connect(m_ui.animationsEnabled, SIGNAL(clicked()), SLOT(updateChanged()));
@@ -119,6 +121,8 @@ namespace SierraBreeze
         m_ui.buttonKeepBelowInactiveColor->setColor(m_internalSettings->buttonKeepBelowInactiveColor());
         m_ui.buttonKeepAboveActiveColor->setColor(m_internalSettings->buttonKeepAboveActiveColor());
         m_ui.buttonKeepAboveInactiveColor->setColor(m_internalSettings->buttonKeepAboveInactiveColor());
+        m_ui.buttonApplicationMenuActiveColor->setColor(m_internalSettings->buttonApplicationMenuActiveColor());
+        m_ui.buttonApplicationMenuInactiveColor->setColor(m_internalSettings->buttonApplicationMenuInactiveColor());
 
         // load shadows
         m_ui.shadowSize->setValue(m_internalSettings->shadowSize());
@@ -169,6 +173,8 @@ namespace SierraBreeze
         m_internalSettings->setButtonKeepBelowInactiveColor(m_ui.buttonKeepBelowInactiveColor->color());
         m_internalSettings->setButtonKeepAboveActiveColor(m_ui.buttonKeepAboveActiveColor->color());
         m_internalSettings->setButtonKeepAboveInactiveColor(m_ui.buttonKeepAboveInactiveColor->color());
+        m_internalSettings->setButtonApplicationMenuActiveColor(m_ui.buttonApplicationMenuActiveColor->color());
+        m_internalSettings->setButtonApplicationMenuInactiveColor(m_ui.buttonApplicationMenuInactiveColor->color());
 
         m_internalSettings->setShadowSize(m_ui.shadowSize->value());
         m_internalSettings->setShadowStrength(qRound(qreal(m_ui.shadowStrength->value() * 255) / 100));
@@ -234,6 +240,8 @@ namespace SierraBreeze
         m_ui.buttonKeepBelowInactiveColor->setColor(m_internalSettings->buttonKeepBelowInactiveColor());
         m_ui.buttonKeepAboveActiveColor->setColor(m_internalSettings->buttonKeepAboveActiveColor());
         m_ui.buttonKeepAboveInactiveColor->setColor(m_internalSettings->buttonKeepAboveInactiveColor());
+        m_ui.buttonApplicationMenuActiveColor->setColor(m_internalSettings->buttonApplicationMenuActiveColor());
+        m_ui.buttonApplicationMenuInactiveColor->setColor(m_internalSettings->buttonApplicationMenuInactiveColor());
 
         m_ui.shadowSize->setValue(m_internalSettings->shadowSize());
         m_ui.shadowStrength->setValue(qRound(qreal(m_internalSettings->shadowStrength() * 100) / 255));
@@ -298,6 +306,10 @@ namespace SierraBreeze
         else if (m_ui.buttonKeepAboveActiveColor->color() != m_internalSettings->buttonKeepAboveActiveColor())
             modified = true;
         else if (m_ui.buttonKeepAboveInactiveColor->color() != m_internalSettings->buttonKeepAboveInactiveColor())
+            modified = true;
+        else if (m_ui.buttonApplicationMenuActiveColor->color() != m_internalSettings->buttonApplicationMenuActiveColor())
+            modified = true;
+        else if (m_ui.buttonApplicationMenuInactiveColor->color() != m_internalSettings->buttonApplicationMenuInactiveColor())
             modified = true;
 
         // animations

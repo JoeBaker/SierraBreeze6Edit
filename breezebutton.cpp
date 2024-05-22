@@ -347,10 +347,27 @@ namespace SierraBreeze
 
                 case DecorationButtonType::ApplicationMenu:
                 {
-                    painter->drawLine(QPointF(3.5, 5), QPointF(14.5, 5));
-                    painter->drawLine(QPointF(3.5, 9), QPointF(14.5, 9));
-                    painter->drawLine(QPointF(3.5, 13), QPointF(14.5, 13));
-                    break;
+                    {
+                        QColor button_color = QColor(c->isActive() ? active_color : inactive_color);
+                        painter->setBrush(button_color);
+                        painter->setPen(Qt::NoPen);
+                        painter->drawEllipse(QRectF(0, 0, 18, 18));
+                        painter->setBrush(Qt::NoBrush);
+                        if (isHovered() || isChecked())
+                        {
+                            painter->setPen(hint_pen);
+                            QPainterPath path;
+                            painter->drawLine(QPointF(3.5, 5), QPointF(14.5, 5));
+                            painter->drawLine(QPointF(3.5, 5), QPointF(14.5, 5));
+                            painter->drawLine(QPointF(3.5, 9), QPointF(14.5, 9));
+                            painter->drawLine(QPointF(3.5, 9), QPointF(14.5, 9));
+                            painter->drawLine(QPointF(3.5, 13), QPointF(14.5, 13));
+                            painter->drawLine(QPointF(3.5, 13), QPointF(14.5, 13));
+                            painter->fillPath(path, QBrush(hover_hint_color));
+                        }
+                        break;
+                        break;
+                    }
                 }
 
                 case DecorationButtonType::ContextHelp:
@@ -533,6 +550,12 @@ namespace SierraBreeze
                 {
                     active_color = d->internalSettings()->buttonKeepAboveActiveColor();
                     inactive_color = d->internalSettings()->buttonKeepAboveInactiveColor();
+                    break;
+                }
+                case DecorationButtonType::ApplicationMenu:
+                {
+                    active_color = d->internalSettings()->buttonApplicationMenuActiveColor();
+                    inactive_color = d->internalSettings()->buttonApplicationMenuInactiveColor();
                     break;
                 }
                 default: break;

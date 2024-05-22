@@ -332,6 +332,16 @@
          </property>
         </widget>
        </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="buttonApplicationMenuLabel">
+         <property name="text">
+          <string>Application Menu:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
        <item row="3" column="1">
         <widget class="KColorButton" name="buttonMinimizeActiveColor"/>
        </item>
@@ -361,6 +371,12 @@
        </item>
        <item row="7" column="2">
         <widget class="KColorButton" name="buttonKeepAboveInactiveColor"/>
+       </item>
+       <item row="8" column="1">
+        <widget class="KColorButton" name="buttonApplicationMenuActiveColor"/>
+       </item>
+       <item row="8" column="2">
+        <widget class="KColorButton" name="buttonApplicationMenuInactiveColor"/>
        </item>
       </layout>
      </widget>

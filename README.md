@@ -1,10 +1,12 @@
-![alt text](https://i.imgur.com/vbH9sWZ.png)
+A simple change to SerraBreeze to change the Menu buttons icon to also be a circle.
+
+![](https://raw.githubusercontent.com/JoeBaker/SierraBreeze6Edit/master/Screenshot.png)
 
 In order to install the theme and add it to your decorations do the following:
 
 ```shell
-git clone https://github.com/jomada/SierraBreeze
-cd SierraBreeze
+git clone https://github.com/JoeBaker/SierraBreeze6Edit
+cd SierraBreeze6Edit
 mkdir build
 cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DKDE_INSTALL_LIBDIR=lib -DBUILD_TESTING=OFF -DKDE_INSTALL_USE_QT_SYS_PATHS=ON

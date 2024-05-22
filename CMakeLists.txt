@@ -34,20 +34,20 @@ set(KDECORATION2_MIN_VERSION "5.27.80")
 find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS CoreAddons GuiAddons ConfigWidgets WindowSystem I18n KCMUtils)
 find_package(KDecoration2 ${KDECORATION2_MIN_VERSION} REQUIRED)
 
-set(sierrabreeze_SRCS
+set(sierrabreezeedit_SRCS
     breezebutton.cpp
     breezedecoration.cpp
     breezeexceptionlist.cpp
     breezesettingsprovider.cpp
 )
 
-kconfig_add_kcfg_files(sierrabreeze_SRCS breezesettings.kcfgc)
+kconfig_add_kcfg_files(sierrabreezeedit_SRCS breezesettings.kcfgc)
 
-add_library(sierrabreeze MODULE
-    ${sierrabreeze_SRCS}
+add_library(sierrabreezeedit MODULE
+    ${sierrabreezeedit_SRCS}
 )
 
-target_link_libraries(sierrabreeze
+target_link_libraries(sierrabreezeedit
     PUBLIC
         Qt6::Core
         Qt6::Gui
@@ -62,6 +62,6 @@ target_link_libraries(sierrabreeze
         KF6::KCMUtils
         KF6::WindowSystem)
 
-install(TARGETS sierrabreeze DESTINATION ${KDE_INSTALL_PLUGINDIR}/${KDECORATION_PLUGIN_DIR})
+install(TARGETS sierrabreezeedit DESTINATION ${KDE_INSTALL_PLUGINDIR}/${KDECORATION_PLUGIN_DIR})
 
 add_subdirectory(config)

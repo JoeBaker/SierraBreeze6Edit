@@ -2,7 +2,7 @@
     "KPlugin": {
         "Description": "Window decoration using the Sierra Breeze visual style for the Plasma Desktop",
         "EnabledByDefault": true,
-        "Name": "Sierra Breeze"
+        "Name": "Sierra Breeze Edit"
     },
     "X-KDE-ConfigModule": "kcm_sierrabreezedecoration",
     "org.kde.kdecoration2": {

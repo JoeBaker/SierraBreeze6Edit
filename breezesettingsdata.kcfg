@@ -143,6 +143,14 @@
          <default>199, 199, 199</default>
       </entry>
 
+      <entry name="ButtonApplicationMenuActiveColor" type = "Color">
+         <default>255, 137, 241</default>
+      </entry>
+
+      <entry name="ButtonApplicationMenuInactiveColor" type = "Color">
+         <default>199, 199, 199</default>
+      </entry>
+
       <!-- maximized windows -->
       <entry name="DrawBorderOnMaximizedWindows" type="Bool">
          <default>false</default>
