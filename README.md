@@ -2,6 +2,8 @@ A simple change to SerraBreeze to change the Menu buttons icon to also be a circ
 
 ![](https://raw.githubusercontent.com/JoeBaker/SierraBreeze6Edit/master/Screenshot.png)
 
+Also removes the special case for Konsole, which causes thousands of warning within journalctl.
+
 In order to install the theme and add it to your decorations do the following:
 
 ```shell

@@ -33,7 +33,6 @@
 #include <KDecoration2/DecorationShadow>
 #include <KPluginFactory>
 #include <KSharedConfig>
-#include <KWindowInfo>
 #include <QDir>
 #include <QPainter>
 #include <QTextStream>
@@ -87,11 +86,6 @@ namespace SierraBreeze
 
         auto c = client();
 
-        if (isKonsoleWindow(c))
-        {
-            return m_KonsoleTitleBarColor;
-        }
-
         if (hideTitleBar())
             return c->color(ColorGroup::Inactive, ColorRole::TitleBar);
         else if (m_animation->state() == QPropertyAnimation::Running)
@@ -128,25 +122,12 @@ namespace SierraBreeze
         auto c = client();
         if (m_animation->state() == QPropertyAnimation::Running)
         {
-            if (isKonsoleWindow(c))
-            {
-                return KColorUtils::mix(m_KonsoleTitleBarTextColorInactive, m_KonsoleTitleBarTextColorActive, m_opacity);
-            }
-            else
-            {
-                return KColorUtils::mix(c->color(ColorGroup::Inactive, ColorRole::Foreground), c->color(ColorGroup::Active, ColorRole::Foreground), m_opacity);
-            }
+            return KColorUtils::mix(c->color(ColorGroup::Inactive, ColorRole::Foreground), c->color(ColorGroup::Active, ColorRole::Foreground), m_opacity);
         }
         else
         {
-            if (isKonsoleWindow(c))
-            {
-                return c->isActive() ? m_KonsoleTitleBarTextColorActive : m_KonsoleTitleBarTextColorInactive;
-            }
-            else
-            {
-                return c->color(c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Foreground);
-            }
+            
+            return c->color(c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Foreground);
         }
     }
 
@@ -342,19 +323,6 @@ namespace SierraBreeze
     }
 
     //________________________________________________________________
-    bool Decoration::isKonsoleWindow(KDecoration2::DecoratedClient *dc) const
-    {
-        if (!m_KonsoleTitleBarColorValid)
-        {
-            return false;
-        }
-
-        KWindowInfo info(dc->windowId(), {}, NET::WM2WindowClass | NET::WM2WindowRole);
-
-        return info.valid() && info.desktopFileName() == "org.kde.konsole";
-    }
-
-    //________________________________________________________________
     void Decoration::reconfigure()
     {
 
@@ -524,14 +492,7 @@ namespace SierraBreeze
             painter->setRenderHint(QPainter::Antialiasing);
             painter->setPen(Qt::NoPen);
 
-            if (isKonsoleWindow(c))
-            {
-                painter->setBrush(m_KonsoleTitleBarColor);
-            }
-            else
-            {
-                painter->setBrush(c->color(c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame));
-            }
+            painter->setBrush(c->color(c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame));
 
             // clip away the top part
             if (!hideTitleBar())
@@ -575,7 +536,7 @@ namespace SierraBreeze
         painter->setPen(Qt::NoPen);
 
         // render a linear gradient on title area
-        if (c->isActive() && m_internalSettings->drawBackgroundGradient() && !isKonsoleWindow(c))
+        if (c->isActive() && m_internalSettings->drawBackgroundGradient())
         {
 
             // TODO Review this. Initialize titleBarColor based on user's choise.
@@ -585,19 +546,13 @@ namespace SierraBreeze
             gradient.setColorAt(0.8, titleBarColor);
             painter->setBrush(gradient);
         }
-        else if (!isKonsoleWindow(c))
+        else
         {
 
             // TODO Review this. Initialize titleBarColor based on user's choise.
             // I needed another else if because the window might not be active or has drawBackgroundGradient but
             // I still need to take care the konsole case.
             const QColor titleBarColor = (matchColorForTitleBar() ? matchedTitleBarColor : this->titleBarColor());
-            painter->setBrush(titleBarColor);
-        }
-        else
-        {
-
-            QColor titleBarColor = this->titleBarColor();
             painter->setBrush(titleBarColor);
         }
 
